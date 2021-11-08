@@ -1,12 +1,12 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "eCareVault EC2 - {ECVENV}",
+    "title": "eCareVault EC2 - dev",
     "version": "2015-12-21T08:35:19Z"
   },
   "servers": [
     {
-      "url": "{ECVHOSTURL}"
+      "url": "192.168.0.1"
     }
   ],
   "paths": {
