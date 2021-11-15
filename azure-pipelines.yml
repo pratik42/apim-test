@@ -25,5 +25,5 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.Repository.LocalPath)'
-    ArtifactName: 'apim-service'
+    ArtifactName: 'devops-kit'
     publishLocation: 'pipeline-2'
