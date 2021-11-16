@@ -348,66 +348,6 @@
     },
     {
       "properties": {
-        "description": "",
-        "authenticationSettings": {
-          "subscriptionKeyRequired": false
-        },
-        "subscriptionKeyParameterNames": {
-          "header": "Ocp-Apim-Subscription-Key",
-          "query": "subscription-key"
-        },
-        "type": "websocket",
-        "apiRevision": "1",
-        "isCurrent": true,
-        "subscriptionRequired": false,
-        "displayName": "ecv-pubsub-socketapi-dev",
-        "serviceUrl": "wss://ecv-pubsub-dev.webpubsub.azure.com/client/hubs/socket_notification",
-        "path": "dev-socket-notification",
-        "protocols": [
-          "ws",
-          "wss"
-        ]
-      },
-      "name": "[concat(parameters('ApimServiceName'), '/ecv-pubsub-socketapi-dev')]",
-      "type": "Microsoft.ApiManagement/service/apis",
-      "apiVersion": "2021-01-01-preview",
-      "dependsOn": []
-    },
-    {
-      "properties": {
-        "templateParameters": [],
-        "description": "WebSocket opening handshake",
-        "request": {
-          "queryParameters": [],
-          "headers": [],
-          "representations": []
-        },
-        "responses": [],
-        "displayName": "onHandshake",
-        "method": "GET",
-        "urlTemplate": ""
-      },
-      "name": "[concat(parameters('ApimServiceName'), '/ecv-pubsub-socketapi-dev/onHandshake')]",
-      "type": "Microsoft.ApiManagement/service/apis/operations",
-      "apiVersion": "2021-01-01-preview",
-      "dependsOn": [
-        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'ecv-pubsub-socketapi-dev')]"
-      ]
-    },
-    {
-      "properties": {
-        "value": "<!--\n    IMPORTANT:\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\n    - To add a policy, place the cursor at the desired insertion point and select a policy from the sidebar.\n    - To remove a policy, delete the corresponding policy statement from the policy document.\n    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.\n    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.\n    - Policies are applied in the order of their appearance, from the top down.\n    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.\n-->\r\n<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-header name=\"Sec-WebSocket-Protocol\" exists-action=\"override\">\r\n\t\t\t<value>json.webpubsub.azure.v1</value>\r\n\t\t</set-header>\r\n\t\t<validate-jwt header-name=\"Authorization\" failed-validation-httpcode=\"401\" failed-validation-error-message=\"Unauthorized. Access token is missing or invalid.\">\r\n\t\t\t<openid-config url=\"https://ecvauth.b2clogin.com/ecvauth.onmicrosoft.com/B2C_1_signup_sign_in/v2.0/.well-known/openid-configuration\" />\r\n\t\t</validate-jwt>\r\n\t\t<set-header name=\"Authorization\" exists-action=\"delete\" />\r\n\t\t<set-backend-service base-url=\"wss://ecv-pubsub-dev.webpubsub.azure.com/client/hubs/socket_notification\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
-        "format": "rawxml"
-      },
-      "name": "[concat(parameters('ApimServiceName'), '/ecv-pubsub-socketapi-dev/onHandshake/policy')]",
-      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
-      "apiVersion": "2021-01-01-preview",
-      "dependsOn": [
-        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'ecv-pubsub-socketapi-dev', 'onHandshake')]"
-      ]
-    },
-    {
-      "properties": {
         "authenticationSettings": {
           "subscriptionKeyRequired": false
         },
