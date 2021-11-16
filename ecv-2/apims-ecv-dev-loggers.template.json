@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ApimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "properties": {
+        "loggerType": "applicationInsights",
+        "credentials": {
+          "instrumentationKey": "{{Logger-Credentials--616f9749217d2011bcc712b4}}"
+        },
+        "isBuffered": true,
+        "resourceId": "/subscriptions/1b5b201c-299f-43a9-ad3d-81e0f963e59e/resourceGroups/rg-dev/providers/microsoft.insights/components/ai-ecv-dev"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/ai-ecv-dev')]",
+      "type": "Microsoft.ApiManagement/service/loggers",
+      "apiVersion": "2021-01-01-preview"
+    }
+  ]
+}
