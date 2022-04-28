@@ -13,17 +13,14 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-- task: CopyFiles@2
+- script: 'azcopy copy ''https://github.com/pratik42/apim-test/blob/master/ecv/Products.template.json'' ''$(build.sourcesdirectory)\myDirectory'''
+  displayName: 'Command Line Script'
+
+- task: AzureFileCopy@4
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: '**'
-    TargetFolder: '$(Build.Repository.LocalPath)'
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.Repository.LocalPath)'
-    ArtifactName: 'devops-kit'
-    publishLocation: 'pipeline-2'
+    sourcePath: '$(build.sourcesdirectory)\myDirectory'
+    azureSubscription: MY-Production-Subscription
+    destination: azureBlob
+    storage: saecvdev
+    containerName: test-container
+    additionalArgumentsForBlobCopy: --recursive=true
